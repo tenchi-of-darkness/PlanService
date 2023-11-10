@@ -19,4 +19,8 @@
       <ProjectReference Include="..\Plan.Logic\Plan.Logic.csproj" />
     </ItemGroup>
 
+
+
+
+
 </Project>

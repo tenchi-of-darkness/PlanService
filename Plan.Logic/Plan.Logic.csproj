@@ -12,4 +12,12 @@
       <PackageReference Include="NetTopologySuite" Version="2.5.0" />
     </ItemGroup>
 
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+
+
+
 </Project>
