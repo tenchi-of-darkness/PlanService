@@ -14,7 +14,7 @@ public class ActivityRepository : IActivityRepository
         _applicationDbContext = applicationDbContext;
     }
 
-    public Task<ActivityEntity> GetActivityById(int id)
+    public Task<ActivityEntity?> GetActivityById(Guid id)
     {
         throw new NotImplementedException();
     }

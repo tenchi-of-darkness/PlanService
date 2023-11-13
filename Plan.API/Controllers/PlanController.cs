@@ -1,6 +1,13 @@
-﻿namespace Plan.API.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
 
-public class PlanController
+namespace Plan.API.Controllers;
+[ApiController]
+[Route("api/plan")]
+public class PlanController : ControllerBase
 {
-    
+   
+    public PlanController()
+    {
+        
+    }
 }

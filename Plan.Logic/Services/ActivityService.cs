@@ -14,7 +14,7 @@ public class ActivityService : IActivityService
         _activityRepository = activityRepository;
     }
 
-    public async Task<ActivityEntity> GetActivityById(int id)
+    public async Task<ActivityEntity?> GetActivityById(Guid id)
     {
         return await _activityRepository.GetActivityById(id);
     }
