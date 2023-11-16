@@ -9,8 +9,9 @@ public class ActivityModel
 
     public string Name { get; set; }
     
-    public string LocationName { get; set; } = "";
-    public Point Location { get; set; }
+    public string LocationName { get; set; }
+    public double LocationLat { get; set; }
+    public double LocationLong { get; set; }
     public Guid OwnerUserId { get; set; }
     public string? Description { get; set; }
     
@@ -23,7 +24,7 @@ public class ActivityModel
             Id = Id,
             Name = Name,
             LocationName = LocationName,
-            Location = Location,
+            Location = new Point(LocationLat, LocationLong),
             OwnerUserId = OwnerUserId,
             Description = Description
         };
@@ -34,7 +35,8 @@ public class ActivityModel
         Id = entity.Id;
         Name = entity.Name;
         LocationName = entity.LocationName;
-        Location = entity.Location;
+        LocationLat = entity.Location.X;
+        LocationLong = entity.Location.Y;
         OwnerUserId = entity.OwnerUserId;
         Description = entity.Description;
     }

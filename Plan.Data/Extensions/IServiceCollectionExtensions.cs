@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Plan.Data.DbContext;
+using Plan.Data.Repositories;
+using Plan.Logic.Repositories.Interfaces;
 
 namespace Plan.Data.Extensions;
 
@@ -17,6 +19,7 @@ public static class ServiceCollectionExtensions
                     options.UseNetTopologySuite();
                 });
         });
+        collection.AddTransient<IActivityRepository, ActivityRepository>();
         return collection;
     }
 }

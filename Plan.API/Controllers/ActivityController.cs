@@ -31,7 +31,7 @@ public class ActivityController : ControllerBase
 
         return Ok(new ActivityModel(activity));
     }
-    
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ActivityModel>>> GetActivities([FromRoute] GetActivitiesRequest request)
     {
@@ -53,5 +53,13 @@ public class ActivityController : ControllerBase
         }
 
         return StatusCode(500, response);
+    }
+
+    [HttpDelete]
+    public async Task<ActionResult> DeleteActivity(Guid id)
+    {
+        if (await _service.DeleteActivity(id))
+            return Ok();
+        return NotFound();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Plan.API.Models.Responses;
+﻿using Microsoft.AspNetCore.Mvc;
+using Plan.API.Models.Responses;
 using Plan.Data.Entities;
 using Plan.Logic.Repositories.Interfaces;
 using Plan.Logic.Services.Interfaces;
@@ -21,7 +22,7 @@ public class ActivityService : IActivityService
 
     public async Task<IEnumerable<ActivityEntity>> GetActivities(string? searchValue, int page, int pageSize)
     {
-        return await _activityRepository.SearchActivityByTitle(searchValue, page, pageSize);
+        return await _activityRepository.SearchActivityByName(searchValue, page, pageSize);
     }
 
     public async Task<AddActivityResponse> AddActivity(ActivityEntity entity)
@@ -38,5 +39,10 @@ public class ActivityService : IActivityService
         }
 
         return new AddActivityResponse();
+    }
+
+    public async Task<bool> DeleteActivity(Guid id)
+    {
+        return await _activityRepository.DeleteActivity(id);
     }
 }
