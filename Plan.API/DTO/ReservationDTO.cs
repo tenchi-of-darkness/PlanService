@@ -1,8 +1,8 @@
-﻿using Plan.Data.Entities;
+﻿using Plan.Domain.Entities;
 
-namespace Plan.API.Models;
+namespace Plan.API.DTO;
 
-public class ReservationModel
+public class ReservationDTO
 {
     public Guid Id { get; set; }
     public Guid CreatorUserId { get; set; }
@@ -21,7 +21,7 @@ public class ReservationModel
         };
     }
     
-    public ReservationModel(ReservationEntity entity)
+    public ReservationDTO(ReservationEntity entity)
     {
         Id = entity.Id;
         CreatorUserId = entity.CreatorUserId;

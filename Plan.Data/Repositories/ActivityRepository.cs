@@ -1,24 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Plan.API.Models.Responses;
 using Plan.Data.DbContext;
-using Plan.Data.Entities;
-using Plan.Logic.Repositories.Interfaces;
+using Plan.Domain.Entities;
+using Plan.Domain.Repositories.Interfaces;
 
 namespace Plan.Data.Repositories;
 
 public class ActivityRepository : IActivityRepository
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public ActivityRepository(ApplicationDbContext applicationDbContext)
+    public ActivityRepository(ApplicationDbContext applicationDbContext, IMapper mapper)
     {
         _context = applicationDbContext;
+        _mapper = mapper;
     }
 
-    public Task<ActivityEntity?> GetActivityById(Guid id)
+    public async Task<ActivityEntity?> GetActivityById(Guid id)
     {
-        throw new NotImplementedException();
+        var activity = await _context.Activities.FindAsync(id);
+        return _mapper.Map<ActivityEntity>(activity);
     }
 
     public async Task<IEnumerable<ActivityEntity>> SearchActivityByName(string? searchValue, int page, int pageSize)
@@ -31,8 +33,7 @@ public class ActivityRepository : IActivityRepository
             query = query.Where(t => t.Name.Contains(searchValue));
         }
 
-        return await query.Skip(skip)
-            .Take(pageSize).ToArrayAsync();
+        return _mapper.Map<ActivityEntity[]>(await query.Skip(skip).Take(pageSize).ToArrayAsync());
     }
 
     public async Task<bool> AddActivity(ActivityEntity entity)

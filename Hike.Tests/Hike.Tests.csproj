@@ -6,26 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-
     <ItemGroup>
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
-      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.NetTopologySuite" Version="7.0.0" />
     </ItemGroup>
-
-
-
-
-    <ItemGroup>
-      <ProjectReference Include="..\Plan.UseCases\Plan.UseCases.csproj" />
-    </ItemGroup>
-
-
-
-
-
-
-
-
 
 </Project>

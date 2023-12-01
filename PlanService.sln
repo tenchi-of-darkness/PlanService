@@ -2,9 +2,13 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan.API", "Plan.API\Plan.API.csproj", "{808A0709-0A67-4C16-B339-9A7831500D3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan.Logic", "Plan.Logic\Plan.Logic.csproj", "{6600DEB2-3749-405B-967E-ACF567FE6098}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan.UseCases", "Plan.UseCases\Plan.UseCases.csproj", "{6600DEB2-3749-405B-967E-ACF567FE6098}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan.Data", "Plan.Data\Plan.Data.csproj", "{30396FB3-27E5-47AC-BD54-C54F37C24E0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan.Domain", "Plan.Domain\Plan.Domain.csproj", "{25EBCD48-3CF6-4991-AF23-E5DD69776B94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hike.Tests", "Hike.Tests\Hike.Tests.csproj", "{435F4B64-0DA4-4305-929D-630BC13AB9F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +28,13 @@ Global
 		{30396FB3-27E5-47AC-BD54-C54F37C24E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30396FB3-27E5-47AC-BD54-C54F37C24E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30396FB3-27E5-47AC-BD54-C54F37C24E0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25EBCD48-3CF6-4991-AF23-E5DD69776B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25EBCD48-3CF6-4991-AF23-E5DD69776B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25EBCD48-3CF6-4991-AF23-E5DD69776B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25EBCD48-3CF6-4991-AF23-E5DD69776B94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{435F4B64-0DA4-4305-929D-630BC13AB9F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{435F4B64-0DA4-4305-929D-630BC13AB9F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{435F4B64-0DA4-4305-929D-630BC13AB9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{435F4B64-0DA4-4305-929D-630BC13AB9F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

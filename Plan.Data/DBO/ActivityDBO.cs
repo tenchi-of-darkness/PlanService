@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using NetTopologySuite.Geometries;
+using System.Drawing;
 
-namespace Plan.Data.Entities;
+namespace Plan.Data.DBO;
 
-public class ActivityEntity
+public class ActivityDBO
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
@@ -14,9 +14,4 @@ public class ActivityEntity
     public Point Location { get; set; } = Point.Empty;
     public Guid OwnerUserId { get; set; }
     public string? Description { get; set; } = "";
-
-    public ActivityEntity()
-    {
-        
-    }
 }

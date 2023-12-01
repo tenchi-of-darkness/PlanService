@@ -1,22 +1,23 @@
 ﻿using NetTopologySuite.Geometries;
-using Plan.Data.Entities;
+using Plan.Domain.Entities;
 
-namespace Plan.API.Models;
+namespace Plan.API.DTO;
 
-public class ActivityModel
+public class ActivityDTO
 {
     public Guid Id { get; set; }
 
     public string Name { get; set; }
     
     public string LocationName { get; set; }
+    
+    public Point Location { get; set; } = Point.Empty;
     public double LocationLat { get; set; }
     public double LocationLong { get; set; }
     public Guid OwnerUserId { get; set; }
     public string? Description { get; set; }
     
     
-
     public ActivityEntity ToEntity()
     {
         return new ActivityEntity
@@ -30,7 +31,7 @@ public class ActivityModel
         };
     }
 
-    public ActivityModel(ActivityEntity entity)
+    public ActivityDTO(ActivityEntity entity)
     {
         Id = entity.Id;
         Name = entity.Name;

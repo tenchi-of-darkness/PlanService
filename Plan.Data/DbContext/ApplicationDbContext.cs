@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Plan.Data.Entities;
+using Plan.Data.DBO;
+using Plan.Domain.Entities;
 
 namespace Plan.Data.DbContext;
 
@@ -22,7 +23,7 @@ public class ApplicationDbContext : Microsoft.EntityFrameworkCore.DbContext
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ActivityEntity>().HasKey(x => x.Id);
+        modelBuilder.Entity<ActivityDBO>().HasKey(x => x.Id);
         modelBuilder.Entity<ReservationEntity>().HasKey(x => x.Id);
     }
     

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Plan.Data.Entities;
+namespace Plan.Domain.Entities;
 
 public class ReservationEntity
 {
@@ -9,9 +9,4 @@ public class ReservationEntity
     public Guid CreatorUserId { get; set; }
     public int TotalPeople { get; set; }
     public DateTime Date { get; set; }
-
-    public ReservationEntity()
-    {
-        
-    }
 }

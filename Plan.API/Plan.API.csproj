@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11">
           <PrivateAssets>all</PrivateAssets>
@@ -27,7 +28,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Plan.Data\Plan.Data.csproj" />
-      <ProjectReference Include="..\Plan.Logic\Plan.Logic.csproj" />
+      <ProjectReference Include="..\Plan.UseCases\Plan.UseCases.csproj" />
     </ItemGroup>
+
+
+
+
 
 </Project>

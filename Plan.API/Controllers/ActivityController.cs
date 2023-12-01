@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Plan.API.Models;
-using Plan.API.Models.Responses;
-using Plan.Data.Entities;
+using Plan.API.DTO;
+using Plan.Domain.Entities;
 using Plan.Logic.Requests.Activities;
 using Plan.Logic.Services.Interfaces;
+using Plan.UseCases.Requests.Activities;
+using Plan.UseCases.Responses;
 
 namespace Plan.API.Controllers;
 
@@ -21,27 +22,27 @@ public class ActivityController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<ActivityModel>> GetActivityById([FromRoute] Guid id)
+    public async Task<ActionResult<ActivityDTO>> GetActivityById([FromRoute] Guid id)
     {
-        ActivityEntity? activity = await _service.GetActivityById(id);
+        var activity = await _service.GetActivityById(id);
         if (activity == null)
         {
             return NotFound();
         }
 
-        return Ok(new ActivityModel(activity));
+        return Ok(new ActivityDTO(activity));
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ActivityModel>>> GetActivities([FromRoute] GetActivitiesRequest request)
+    public async Task<ActionResult<IEnumerable<ActivityDTO>>> GetActivities([FromRoute] GetActivitiesRequest request)
     {
         return Ok(await _service.GetActivities(request.SearchValue, request.Page, request.PageSize));
     }
 
     [HttpPost]
-    public async Task<ActionResult<AddActivityResponse>> AddActivity([FromBody] ActivityModel model)
+    public async Task<ActionResult<AddActivityResponse>> AddActivity([FromBody] AddActivityRequest request)
     {
-        AddActivityResponse response = await _service.AddActivity(model.ToEntity());
+        AddActivityResponse response = await _service.AddActivity(request);
         if (response.FailureReason == null)
         {
             return Ok();
@@ -58,8 +59,7 @@ public class ActivityController : ControllerBase
     [HttpDelete]
     public async Task<ActionResult> DeleteActivity(Guid id)
     {
-        if (await _service.DeleteActivity(id))
-            return Ok();
-        return NotFound();
+        if (await _service.DeleteActivity(id))NotFound();
+        return new NotFoundResult();
     }
 }

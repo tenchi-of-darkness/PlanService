@@ -1,4 +1,4 @@
-﻿namespace Plan.API.Models.Responses;
+﻿namespace Plan.UseCases.Responses;
 
 public record AddActivityResponse(FailureType? FailureType = null, string? FailureReason = null);
 
