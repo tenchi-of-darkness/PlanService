@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Plan.API.DTO;
 using Plan.Domain.Entities;
 using Plan.Logic.Requests.Activities;
@@ -14,11 +16,13 @@ public class ActivityController : ControllerBase
 {
     private readonly ILogger<ActivityController> _logger;
     private readonly IActivityService _service;
+    private readonly IMapper _mapper;
 
-    public ActivityController(IActivityService service, ILogger<ActivityController> logger)
+    public ActivityController(IActivityService service, ILogger<ActivityController> logger, IMapper mapper)
     {
         _service = service;
         _logger = logger;
+        _mapper = mapper;
     }
 
     [HttpGet("{id:guid}")]
@@ -30,13 +34,13 @@ public class ActivityController : ControllerBase
             return NotFound();
         }
 
-        return Ok(new ActivityDTO(activity));
+        return Ok(_mapper.Map<ActivityDTO>(activity));
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ActivityDTO>>> GetActivities([FromRoute] GetActivitiesRequest request)
     {
-        return Ok(await _service.GetActivities(request.SearchValue, request.Page, request.PageSize));
+        return Ok(_mapper.Map<ActivityDTO[]>(await _service.GetActivities(request.SearchValue, request.Page, request.PageSize)));
     }
 
     [HttpPost]

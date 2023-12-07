@@ -24,9 +24,9 @@ public class ApplicationDbContext : Microsoft.EntityFrameworkCore.DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ActivityDBO>().HasKey(x => x.Id);
-        modelBuilder.Entity<ReservationEntity>().HasKey(x => x.Id);
+        modelBuilder.Entity<ReservationDBO>().HasKey(x => x.Id);
     }
     
-    public DbSet<ActivityEntity> Activities { get; set; } = null!;
-    public DbSet<ReservationEntity> Reservations { get; set; } = null!;
+    public DbSet<ActivityDBO> Activities { get; set; } = null!;
+    public DbSet<ReservationDBO> Reservations { get; set; } = null!;
 }

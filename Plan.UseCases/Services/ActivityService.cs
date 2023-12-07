@@ -36,7 +36,11 @@ public class ActivityService : IActivityService
                 "Description has too many characters. Only 255 characters are allowed");
         }
 
-        if (!await _activityRepository.AddActivity(_mapper.Map<ActivityEntity>(request)))
+        var activity = _mapper.Map<ActivityEntity>(request);
+
+        // activity.OwnerUserId = 
+
+        if (!await _activityRepository.AddActivity(activity))
         {
             return new AddActivityResponse(FailureType.Server, "Database failure");
         }
