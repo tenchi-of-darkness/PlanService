@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using NetTopologySuite.Geometries;
 
-namespace Plan.Domain.Entities;
+namespace Plan.UseCases.Entities;
 
 public class ActivityEntity
 {

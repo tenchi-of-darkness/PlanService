@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Plan.Domain.Entities;
 using Plan.Data.DBO;
+using Plan.UseCases.Entities;
 
 namespace Plan.Data.Mappings;
 

@@ -2,11 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Plan.API.DTO;
-using Plan.Domain.Entities;
-using Plan.Logic.Requests.Activities;
-using Plan.Logic.Services.Interfaces;
 using Plan.UseCases.Requests.Activities;
 using Plan.UseCases.Responses;
+using Plan.UseCases.Services.Interfaces;
 
 namespace Plan.API.Controllers;
 

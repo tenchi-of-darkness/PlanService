@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Plan.Data.DbContext;
-using Plan.Domain.Entities;
-using Plan.Domain.Repositories.Interfaces;
+using Plan.UseCases.Entities;
+using Plan.UseCases.Repositories.Interfaces;
 
 namespace Plan.Data.Repositories;
 

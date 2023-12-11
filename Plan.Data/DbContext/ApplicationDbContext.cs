@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Plan.Data.DBO;
-using Plan.Domain.Entities;
 
 namespace Plan.Data.DbContext;
 

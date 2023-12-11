@@ -1,5 +1,4 @@
 ﻿using NetTopologySuite.Geometries;
-using Plan.Domain.Entities;
 
 namespace Plan.API.DTO;
 

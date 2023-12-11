@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.Tokens;
 using NetTopologySuite.IO.Converters;
 using Plan.Data.Extensions;
-using Plan.Logic.Extensions;
+using Plan.UseCases.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

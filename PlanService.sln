@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan.Data", "Plan.Data\Plan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan.Domain", "Plan.Domain\Plan.Domain.csproj", "{25EBCD48-3CF6-4991-AF23-E5DD69776B94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hike.Tests", "Hike.Tests\Hike.Tests.csproj", "{435F4B64-0DA4-4305-929D-630BC13AB9F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan.Tests", "Plan.Tests\Plan.Tests.csproj", "{435F4B64-0DA4-4305-929D-630BC13AB9F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

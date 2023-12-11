@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Plan.Domain.Entities;
-using Plan.Domain.Repositories.Interfaces;
-using Plan.Logic.Services.Interfaces;
+using Plan.UseCases.Entities;
+using Plan.UseCases.Repositories.Interfaces;
 using Plan.UseCases.Requests.Activities;
 using Plan.UseCases.Responses;
+using Plan.UseCases.Services.Interfaces;
 
-namespace Plan.Logic.Services;
+namespace Plan.UseCases.Services;
 
 public class ActivityService : IActivityService
 {
@@ -18,14 +18,14 @@ public class ActivityService : IActivityService
         _mapper = mapper;
     }
 
-    public async Task<ActivityEntity?> GetActivityById(Guid id)
+    public async Task<GetActivityResponse?> GetActivityById(Guid id)
     {
-        return await _activityRepository.GetActivityById(id);
+        return _mapper.Map<GetActivityResponse>(await _activityRepository.GetActivityById(id));
     }
 
-    public async Task<IEnumerable<ActivityEntity>> GetActivities(string? searchValue, int page, int pageSize)
+    public async Task<GetActivitiesResponse> GetActivities(string? searchValue, int page, int pageSize)
     {
-        return await _activityRepository.SearchActivityByName(searchValue, page, pageSize);
+        return new GetActivitiesResponse(_mapper.Map<GetActivityResponse[]>(await _activityRepository.SearchActivityByName(searchValue, page, pageSize)));
     }
 
     public async Task<AddActivityResponse> AddActivity(AddActivityRequest request)

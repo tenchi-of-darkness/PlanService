@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Plan.Logic.Services;
-using Plan.Logic.Services.Interfaces;
+using Plan.UseCases.Services;
+using Plan.UseCases.Services.Interfaces;
 
-namespace Plan.Logic.Extensions;
+namespace Plan.UseCases.Extensions;
 
 public static class ServiceCollectionExtensions
 {

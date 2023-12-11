@@ -1,6 +1,6 @@
-﻿using Plan.Domain.Entities;
+﻿using Plan.UseCases.Entities;
 
-namespace Plan.Domain.Repositories.Interfaces;
+namespace Plan.UseCases.Repositories.Interfaces;
 
 public interface IActivityRepository
 {

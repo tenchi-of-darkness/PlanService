@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Plan.Domain.Entities;
+namespace Plan.UseCases.Entities;
 
 public class ReservationEntity
 {

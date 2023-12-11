@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Plan.Data.DbContext;
 using Plan.Data.Mappings;
 using Plan.Data.Repositories;
-using Plan.Domain.Repositories.Interfaces;
+using Plan.UseCases.Repositories.Interfaces;
 
 namespace Plan.Data.Extensions;
 

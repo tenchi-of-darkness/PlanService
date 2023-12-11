@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using NetTopologySuite.Geometries;
 using Plan.API.DTO;
-using Plan.Domain.Entities;
+using Plan.UseCases.Entities;
 
 namespace Plan.API.Mappings;
 

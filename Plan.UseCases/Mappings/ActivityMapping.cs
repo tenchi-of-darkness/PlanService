@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Plan.Domain.Entities;
+using Plan.UseCases.Entities;
 using Plan.UseCases.Requests.Activities;
 using Plan.UseCases.Responses;
 
-namespace Plan.Logic.Mappings;
+namespace Plan.UseCases.Mappings;
 
 public class ActivityMapping: Profile
 {
