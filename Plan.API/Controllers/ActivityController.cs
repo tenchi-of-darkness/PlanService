@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Plan.API.DTO;
+using Plan.UseCases.Entities;
 using Plan.UseCases.Requests.Activities;
 using Plan.UseCases.Responses;
 using Plan.UseCases.Services.Interfaces;
@@ -32,13 +33,17 @@ public class ActivityController : ControllerBase
             return NotFound();
         }
 
-        return Ok(_mapper.Map<ActivityDTO>(activity));
+        return Ok(_mapper.Map<ActivityDTO>(_mapper.Map<ActivityEntity>(activity)));
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ActivityDTO>>> GetActivities([FromRoute] GetActivitiesRequest request)
+    public async Task<ActionResult<IEnumerable<ActivityDTO>>> GetActivities([FromQuery] GetActivitiesRequest request)
     {
-        return Ok(_mapper.Map<ActivityDTO[]>(await _service.GetActivities(request.SearchValue, request.Page, request.PageSize)));
+        var response = await _service.GetActivities(request.SearchValue, request.Page, request.PageSize);
+
+        if (response.Error != null) return BadRequest(response.Error);
+        
+        return Ok(_mapper.Map<ActivityDTO[]>(_mapper.Map<ActivityEntity[]>(response.Activities)));
     }
 
     [HttpPost]

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using NetTopologySuite.Geometries;
 using Plan.Data.DBO;
 using Plan.UseCases.Entities;
 

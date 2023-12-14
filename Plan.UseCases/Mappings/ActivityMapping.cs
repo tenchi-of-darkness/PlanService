@@ -11,5 +11,7 @@ public class ActivityMapping: Profile
     {
         CreateMap<AddActivityRequest, ActivityEntity>();
         CreateMap<ActivityEntity, AddActivityResponse>();
+        CreateMap<ActivityEntity, GetActivityResponse>();
+        CreateMap<GetActivityResponse, ActivityEntity>();
     }
 }

@@ -25,6 +25,11 @@ public class ActivityService : IActivityService
 
     public async Task<GetActivitiesResponse> GetActivities(string? searchValue, int page, int pageSize)
     {
+        if (page < 1)
+        {
+            return new GetActivitiesResponse("Page was lower than 1.");
+        }
+        
         return new GetActivitiesResponse(_mapper.Map<GetActivityResponse[]>(await _activityRepository.SearchActivityByName(searchValue, page, pageSize)));
     }
 

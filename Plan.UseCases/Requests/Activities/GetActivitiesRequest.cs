@@ -1,3 +1,5 @@
-﻿namespace Plan.UseCases.Requests.Activities;
+﻿using Microsoft.AspNetCore.Mvc;
 
-public record GetActivitiesRequest(string? SearchValue, int Page=1, int PageSize=10);
+namespace Plan.UseCases.Requests.Activities;
+
+public record GetActivitiesRequest([FromQuery]string? SearchValue, [FromQuery]int Page=1, [FromQuery]int PageSize=10);

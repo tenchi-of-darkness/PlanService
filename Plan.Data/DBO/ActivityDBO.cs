@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
+using NetTopologySuite.Geometries;
 
 namespace Plan.Data.DBO;
 
