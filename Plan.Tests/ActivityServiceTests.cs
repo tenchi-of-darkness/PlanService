@@ -58,49 +58,51 @@ public class ActivityServiceTests
         Assert.Equal(result, response);
     }
 
-    // [Fact]
-    // public async Task GetActivities_ReturnsActivitiesResponse()
-    // {
-    //     // Arrange
-    //     var expectedSearchValue = "sample search value";
-    //     var expectedPage = 1;
-    //     var expectedPageSize = 5;
-    //     var activities = new[]
-    //         { new ActivityEntity { Id = Guid.NewGuid() }, new ActivityEntity { Id = Guid.NewGuid() } };
-    //     var responses = _mapper.Map<GetActivityResponse[]>(activities);
-    //
-    //     _activityRepositoryMock.Setup(m => m.SearchActivityByName(expectedSearchValue, expectedPage, expectedPageSize))
-    //         .ReturnsAsync(activities);
-    //
-    //     // Act
-    //     var result = await _activityService.GetActivities(expectedSearchValue, expectedPage, expectedPageSize);
-    //
-    //     // Assert
-    //     Assert.Equal(responses, result.Activities ?? Enumerable.Empty<GetActivityResponse>());
-    // }
-    //
+    [Fact]
+    public async Task GetActivities_ReturnsActivitiesResponse()
+    {
+        // Arrange
+        var expectedSearchValue = "Test activity";
+        var expectedPage = 1;
+        var expectedPageSize = 5;
+        var activityService = CreateService();
+        var activities = new[]
+            { new ActivityEntity { Id = Guid.NewGuid() }, new ActivityEntity { Id = Guid.NewGuid() } };
+        var responses = _mapper.Map<GetActivityResponse[]>(activities);
+    
+        _activityRepositoryMock.Setup(m => m.SearchActivityByName(expectedSearchValue, expectedPage, expectedPageSize))
+            .ReturnsAsync(activities);
+    
+        // Act
+        var result = await activityService.GetActivities(expectedSearchValue, expectedPage, expectedPageSize);
+    
+        // Assert
+        Assert.Equal(responses, result.Activities ?? Enumerable.Empty<GetActivityResponse>());
+    }
+    
     // [Fact]
     // public async Task GetActivities_Search_CorrectResult()
     // {
     //     //Arrange
-    //     string searchValue = "activity";
+    //     const string searchValue = "activity";
     //     int page = 1;
     //     int pageSize = 5;
-    //     var activities = new List<Entities.Activity>();
-    //     var expectedResponse = new GetActivitiesResponse();
+    //     var activityService = CreateService();
+    //     var activities = new List<ActivityEntity>();
+    //     //var expectedResponse = new GetActivitiesResponse();
     //
     //     _activityRepositoryMock.Setup(x => x.SearchActivityByName(searchValue, page, pageSize))
     //         .ReturnsAsync(activities);
-    //     _mapper.Setup(x => x.Map<GetActivityResponse[]>(activities)).Returns(new GetActivityResponse[] { });
-    //
+    //     //_mapper.Setup(x => x.Map<GetActivityResponse[]>(activities)).Returns(new GetActivityResponse[] { });
+    //     var response = _mapper.Map<GetActivityResponse[]>(activities);
+    //     
     //     //Act
-    //     var result = await _activityService.GetActivities(searchValue, page, pageSize);
+    //     var result = await activityService.GetActivities(searchValue, page, pageSize);
     //
     //     //Assert
-    //     Assert.Equal(expectedResponse, result);
+    //     Assert.Equal(response, result);
     // }
-    //
-    //
+    
     // [Fact]
     // public async Task AddActivity()
     // {
