@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Plan.Data.DbContext;
+using Plan.Data.DBO;
 using Plan.UseCases.Entities;
 using Plan.UseCases.Repositories.Interfaces;
 
@@ -38,8 +39,8 @@ public class ActivityRepository : IActivityRepository
 
     public async Task<bool> AddActivity(ActivityEntity entity)
     {
-        throw new NotImplementedException(); 
-   
+        _context.Activities.Add(_mapper.Map<ActivityDBO>(entity));
+        return await _context.SaveChangesAsync() == 1;
     }
 
     public async Task<bool> DeleteActivity(Guid id)

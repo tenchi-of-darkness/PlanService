@@ -80,47 +80,50 @@ public class ActivityServiceTests
         Assert.Equal(responses, result.Activities ?? Enumerable.Empty<GetActivityResponse>());
     }
     
-    // [Fact]
-    // public async Task GetActivities_Search_CorrectResult()
-    // {
-    //     //Arrange
-    //     const string searchValue = "activity";
-    //     int page = 1;
-    //     int pageSize = 5;
-    //     var activityService = CreateService();
-    //     var activities = new List<ActivityEntity>();
-    //     //var expectedResponse = new GetActivitiesResponse();
-    //
-    //     _activityRepositoryMock.Setup(x => x.SearchActivityByName(searchValue, page, pageSize))
-    //         .ReturnsAsync(activities);
-    //     //_mapper.Setup(x => x.Map<GetActivityResponse[]>(activities)).Returns(new GetActivityResponse[] { });
-    //     var response = _mapper.Map<GetActivityResponse[]>(activities);
-    //     
-    //     //Act
-    //     var result = await activityService.GetActivities(searchValue, page, pageSize);
-    //
-    //     //Assert
-    //     Assert.Equal(response, result);
-    // }
+    [Fact]
+    public async Task GetActivities_Search_CorrectResult()
+    {
+        //Arrange
+        const string searchValue = "activity";
+        int page = 1;
+        int pageSize = 5;
+        var activityService = CreateService();
+        var activities = new List<ActivityEntity>();
+        activities.Add(new ActivityEntity
+        {
+            Id = Guid.NewGuid()
+        });
+        var response = _mapper.Map<GetActivityResponse[]>(activities);
     
-    // [Fact]
-    // public async Task AddActivity()
-    // {
-    //     //Arrange
-    //     var request = new AddActivityRequest("Test", "lokaal", Point.Empty, "test");
-    //     var entity = new ActivityEntity();
-    //     var service = CreateService();
-    //     var expectedResponse = new AddActivityResponse();
-    //
-    //     _mockActivitymapper.Setup(x => x.Map<ActivityEntity>(request)).Returns(entity);
-    //     _activityRepositoryMock.Setup(x => x.AddActivity(entity)).ReturnsAsync(true);
-    //
-    //     //Act
-    //     var result = await _activityService.AddActivity(request);
-    //
-    //     //Assert
-    //     Assert.Equal(expectedResponse, result);
-    // }
+        _activityRepositoryMock.Setup(x => x.SearchActivityByName(searchValue, page, pageSize))
+            .ReturnsAsync(activities);
+        
+        //Act
+        var result = await activityService.GetActivities(searchValue, page, pageSize);
+    
+        //Assert
+        Assert.Equal(response.Select(x=>x.Id), result.Activities?.Select(x=>x.Id)??Enumerable.Empty<Guid>());
+    }
+    
+    [Fact]
+    public async Task AddActivity()
+    {
+        //Arrange
+        var request = new AddActivityRequest("Test", "lokaal", Point.Empty, "test");
+        var activity = new ActivityEntity();
+        var activityService = CreateService();
+        var expectedResponse = new AddActivityResponse();
+        
+        var userId = Guid.NewGuid();
+        activity.OwnerUserId = userId;
+        _activityRepositoryMock.Setup(x => x.AddActivity(It.IsAny<ActivityEntity>())).ReturnsAsync(true);
+    
+        //Act
+        var result = await activityService.AddActivity(request);
+    
+        //Assert
+        Assert.Equal(expectedResponse, result);
+    }
     //
     //
     // [Fact]
