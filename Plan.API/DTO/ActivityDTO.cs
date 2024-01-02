@@ -12,6 +12,6 @@ public class ActivityDTO
     
     public double LocationLat { get; set; }
     public double LocationLong { get; set; }
-    public Guid OwnerUserId { get; set; }
+    public string OwnerUserId { get; set; }
     public string? Description { get; set; }
 }

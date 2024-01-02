@@ -4,6 +4,7 @@ using Plan.UseCases.Repositories.Interfaces;
 using Plan.UseCases.Requests.Activities;
 using Plan.UseCases.Responses;
 using Plan.UseCases.Services.Interfaces;
+using Plan.UseCases.Utilities.Interfaces;
 
 namespace Plan.UseCases.Services;
 
@@ -11,11 +12,13 @@ public class ActivityService : IActivityService
 {
     private readonly IActivityRepository _activityRepository;
     private readonly IMapper _mapper;
+    private readonly IAuthenticationUtility _authenticationUtility;
 
-    public ActivityService(IActivityRepository activityRepository, IMapper mapper)
+    public ActivityService(IActivityRepository activityRepository, IMapper mapper, IAuthenticationUtility authenticationUtility)
     {
         _activityRepository = activityRepository;
         _mapper = mapper;
+        _authenticationUtility = authenticationUtility;
     }
 
     public async Task<GetActivityResponse?> GetActivityById(Guid id)
@@ -40,10 +43,17 @@ public class ActivityService : IActivityService
             return new AddActivityResponse(FailureType.User,
                 "Description has too many characters. Only 255 characters are allowed");
         }
+        
+        var userId = _authenticationUtility.GetUserId();
+
+        if (userId == null)
+        {
+            return new AddActivityResponse(FailureType.User, "Authentication failure");
+        }
 
         var activity = _mapper.Map<ActivityEntity>(request);
 
-        // activity.OwnerUserId = 
+        activity.OwnerUserId = userId;
 
         if (!await _activityRepository.AddActivity(activity))
         {

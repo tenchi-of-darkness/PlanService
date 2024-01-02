@@ -12,6 +12,6 @@ public class ActivityEntity
 
     public string LocationName { get; set; } = "";
     public Point Location { get; set; } = Point.Empty;
-    public Guid OwnerUserId { get; set; }
+    public string OwnerUserId { get; set; }
     public string? Description { get; set; } = "";
 }

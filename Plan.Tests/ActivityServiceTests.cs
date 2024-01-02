@@ -9,13 +9,16 @@ using Plan.UseCases.Repositories.Interfaces;
 using Plan.UseCases.Requests.Activities;
 using Plan.UseCases.Responses;
 using Plan.UseCases.Services;
+using Plan.UseCases.Utilities.Interfaces;
 
 namespace Plan.Tests;
 
 public class ActivityServiceTests
 {
     private readonly Mock<IActivityRepository> _activityRepositoryMock = new();
+    private readonly Mock<IAuthenticationUtility> _authenticationUtilityMock = new (MockBehavior.Strict);
     private readonly IMapper _mapper;
+    private const string UserId = "test";
 
     public ActivityServiceTests()
     {
@@ -30,7 +33,8 @@ public class ActivityServiceTests
 
     private ActivityService CreateService()
     {
-        return new ActivityService(_activityRepositoryMock.Object, _mapper);
+        _authenticationUtilityMock.Setup(x => x.GetUserId()).Returns(UserId);
+        return new ActivityService(_activityRepositoryMock.Object, _mapper, _authenticationUtilityMock.Object);
     }
 
     [Fact]
@@ -44,7 +48,7 @@ public class ActivityServiceTests
             Location = new Point(new Coordinate(1, 5)),
             LocationName = "Eindhoven",
             Name = "Activity",
-            OwnerUserId = new Guid()
+            OwnerUserId = new string(UserId)
         };
         _activityRepositoryMock.Setup(repo => repo.GetActivityById(It.IsAny<Guid>())).ReturnsAsync(activity);
         var activityService = CreateService();
@@ -113,9 +117,7 @@ public class ActivityServiceTests
         var activity = new ActivityEntity();
         var activityService = CreateService();
         var expectedResponse = new AddActivityResponse();
-        
-        var userId = Guid.NewGuid();
-        activity.OwnerUserId = userId;
+
         _activityRepositoryMock.Setup(x => x.AddActivity(It.IsAny<ActivityEntity>())).ReturnsAsync(true);
     
         //Act
@@ -124,19 +126,20 @@ public class ActivityServiceTests
         //Assert
         Assert.Equal(expectedResponse, result);
     }
-    //
-    //
-    // [Fact]
-    // public async Task DeleteActivity()
-    // {
-    //     // Arrange
-    //     var expectedActivityId = Guid.NewGuid();
-    //     _activityRepositoryMock.Setup(x => x.DeleteActivity(expectedActivityId)).ReturnsAsync(true);
-    //
-    //     // Act
-    //     var result = await _activityService.DeleteActivity(expectedActivityId);
-    //
-    //     // Assert
-    //     Assert.True(result);
-    // }
+    
+    [Fact]
+    public async Task DeleteActivity()
+    {
+        // Arrange
+        var id = Guid.NewGuid();
+        var activityService = CreateService();
+        _activityRepositoryMock.Setup(x => x.DeleteActivity(id)).ReturnsAsync(true);
+    
+        // Act
+        var result = await activityService.DeleteActivity(id);
+    
+        // Assert
+        _activityRepositoryMock.Verify(repo => repo.DeleteActivity(id), Times.Once);
+        Assert.True(result);
+    }
 }

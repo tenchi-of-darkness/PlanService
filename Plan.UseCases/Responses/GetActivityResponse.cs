@@ -2,5 +2,5 @@
 
 namespace Plan.UseCases.Responses;
 
-public record GetActivityResponse(Guid Id, string Name, string LocationName, Point Location, Guid OwnerUserId,
+public record GetActivityResponse(Guid Id, string Name, string LocationName, Point Location, string OwnerUserId,
     string Description);

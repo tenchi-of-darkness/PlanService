@@ -22,7 +22,9 @@ builder.Services.AddLogic().AddData(builder.Configuration);
 
 builder.Services.AddAutoMapper(typeof(Program));
 
-var authority = "https://securetoken.google.com/" + builder.Configuration["FireBase:AppId"];
+var authority = "https://securetoken.google.com/" + builder.Configuration["FireBase:ProjectId"];
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddAuthentication().AddJwtBearer(options =>
 {
@@ -32,7 +34,7 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
         ValidateIssuer = true,
         ValidIssuer = authority,
         ValidateAudience = true,
-        ValidAudience = builder.Configuration["FireBase:AppId"],
+        ValidAudience = builder.Configuration["FireBase:ProjectId"],
         ValidateLifetime = true
     };
 });

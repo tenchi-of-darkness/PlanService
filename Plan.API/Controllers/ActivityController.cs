@@ -66,7 +66,7 @@ public class ActivityController : ControllerBase
     [HttpDelete]
     public async Task<ActionResult> DeleteActivity(Guid id)
     {
-        if (await _service.DeleteActivity(id))NotFound();
-        return new NotFoundResult();
+        if (await _service.DeleteActivity(id))Ok();
+        return NotFound();
     }
 }
