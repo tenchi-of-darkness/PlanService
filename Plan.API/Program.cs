@@ -1,6 +1,9 @@
 using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MySqlConnector;
 using NetTopologySuite.IO.Converters;
+using Plan.Data.DbContext;
 using Plan.Data.Extensions;
 using Plan.UseCases.Extensions;
 
@@ -60,5 +63,17 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (IServiceScope serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    ApplicationDbContext? context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+    try
+    {
+        context?.Database.Migrate();
+    }
+    catch (MySqlException)
+    {
+    }
+}
 
 app.Run();
