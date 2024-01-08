@@ -49,7 +49,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --no-restore --verbosity normal Plan.Tests/Plan.Tests.csproj
+      - name: Codecov
+        uses: codecov/codecov-action@v1
         
   docker:
     runs-on: ubuntu-latest
