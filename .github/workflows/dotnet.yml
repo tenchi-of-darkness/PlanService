@@ -39,7 +39,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: qodana
+    needs: analyze
     
     steps:
       - uses: actions/checkout@v3
