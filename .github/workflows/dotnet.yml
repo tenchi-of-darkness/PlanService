@@ -36,6 +36,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
+        run: |
+          dotnet tool install --global dotnet-coverage pushed TravelPlanner 
+          ~/.sonar/scanner/dotnet-sonarscanner begin /k:"${{ secrets.SONAR_TOKEN }}" /o:"Melanie" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+          dotnet build --no-incremental
+          dotnet-coverage collect 'dotnet test' -f xml -o 'coverage.xml'
+          ~/.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="$${{ secrets.SONAR_TOKEN }}"
+          popd
 
   test:
     runs-on: ubuntu-latest
