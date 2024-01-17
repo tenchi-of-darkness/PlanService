@@ -72,3 +72,11 @@ using (IServiceScope serviceScope = app.Services.GetRequiredService<IServiceScop
 }
 
 app.Run();
+
+namespace Plan.API
+{
+    public class PlanApiProgram
+    {
+
+    }
+}
