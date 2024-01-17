@@ -22,7 +22,7 @@ public class PlanIntegrationTests: IClassFixture<WebApplicationFactory<PlanApiPr
     }
     
     [Fact]
-    public async Task GetTrails_AddTrail_Success()
+    public async Task GetActivities_AddActivity_Success()
     {
         // Arrange
         var client = _factory.CreateClient();
@@ -48,28 +48,27 @@ public class PlanIntegrationTests: IClassFixture<WebApplicationFactory<PlanApiPr
         Assert.True(activities.Any());
     }
 
-    // [Fact]
-    // public async Task AddTrail_DeleteTrail_GetById_NotFound()
-    // {
-    //     // Arrange
-    //     var client = _factory.CreateClient();
-    //
-    //     // Act
-    //     var response = await client.PostAsJsonAsync("/api/trail",
-    //         new AddTrailRequest(new Point(55, 8), new Point(55, 9), 3f,
-    //             TrailDifficulty.Beginner, "", "", "", 1L),
-    //         Default.JsonSerializerOptions);
-    //     var getTrailsResponse = await client.GetAsync("/api/trail?Page=1&PageSize=15");
-    //     var trail =
-    //         await getTrailsResponse.Content.ReadFromJsonAsync<IEnumerable<TrailDTO>>(Default.JsonSerializerOptions);
-    //     Guid id = trail!.First().Id;
-    //     var deleteResponse = await client.DeleteAsync($"/api/trail/{id}");
-    //     var getTrailResponse = await client.GetAsync($"/api/trail/{id}");
-    //
-    //     // Assert
-    //     response.EnsureSuccessStatusCode();
-    //     getTrailsResponse.EnsureSuccessStatusCode();
-    //     deleteResponse.EnsureSuccessStatusCode();
-    //     Assert.True(getTrailResponse.StatusCode == HttpStatusCode.NotFound);
-    // }
+    [Fact]
+    public async Task AddActivity_DeleteActivity_GetById_NotFound()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+    
+        // Act
+        var response = await client.PostAsJsonAsync("/api/activity",
+            new AddActivityRequest("", "", new Point(5,8),""),
+            Default.JsonSerializerOptions);
+        var getActivitiesResponse = await client.GetAsync("/api/activity?Page=1&PageSize=15");
+        var activity =
+            await getActivitiesResponse.Content.ReadFromJsonAsync<IEnumerable<ActivityDTO>>(Default.JsonSerializerOptions);
+        Guid id = activity!.First().Id;
+        var deleteResponse = await client.DeleteAsync($"/api/activity/{id}");
+        var getActivityResponse = await client.GetAsync($"/api/activity/{id}");
+    
+        // Assert
+        response.EnsureSuccessStatusCode();
+        getActivitiesResponse.EnsureSuccessStatusCode();
+        deleteResponse.EnsureSuccessStatusCode();
+        Assert.True(getActivityResponse.StatusCode == HttpStatusCode.NotFound);
+    }
 }

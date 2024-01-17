@@ -63,7 +63,7 @@ public class ActivityController : ControllerBase
         return StatusCode(500, response);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id:guid}")]
     public async Task<ActionResult> DeleteActivity(Guid id)
     {
         if (await _service.DeleteActivity(id)) return Ok();
